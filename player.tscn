@@ -1,0 +1,99 @@
+[gd_scene load_steps=13 format=3 uid="uid://c2pqrwucxdl54"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_ybc71"]
+[ext_resource type="Resource" uid="uid://q71fj1pv812p" path="res://PlayerMovementData.tres" id="2_xx6ln"]
+[ext_resource type="Texture2D" uid="uid://cgs37ucke6pb2" path="res://jetpack.png" id="3_s7ibg"]
+[ext_resource type="PackedScene" uid="uid://bbnpq11mvb5i2" path="res://jetpack_flames.tscn" id="4_qkuny"]
+[ext_resource type="Texture2D" uid="uid://bhasdv7rpvt1s" path="res://jetpack_dood.png" id="4_x00ff"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6xcgw"]
+atlas = ExtResource("4_x00ff")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_25osm"]
+atlas = ExtResource("4_x00ff")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2et8d"]
+atlas = ExtResource("4_x00ff")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_btl4l"]
+atlas = ExtResource("4_x00ff")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bytvg"]
+atlas = ExtResource("4_x00ff")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6cuk8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6xcgw")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_25osm")
+}],
+"loop": true,
+"name": &"jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2et8d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_btl4l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bytvg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_btl4l")
+}],
+"loop": true,
+"name": &"run",
+"speed": 6.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_72rwe"]
+size = Vector2(6, 14)
+
+[node name="player" type="CharacterBody2D"]
+floor_constant_speed = true
+floor_snap_length = 3.0
+script = ExtResource("1_ybc71")
+movement_data = ExtResource("2_xx6ln")
+
+[node name="jetpack" type="Sprite2D" parent="."]
+texture = ExtResource("3_s7ibg")
+
+[node name="right_flames" parent="jetpack" instance=ExtResource("4_qkuny")]
+position = Vector2(-3, 6)
+emitting = false
+
+[node name="left_flames" parent="jetpack" instance=ExtResource("4_qkuny")]
+position = Vector2(3, 6)
+emitting = false
+
+[node name="animated_sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_6cuk8")
+animation = &"idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_72rwe")
+
+[node name="coyote_time" type="Timer" parent="."]
+wait_time = 0.15
+one_shot = true
+
+[node name="jetpack_time" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true

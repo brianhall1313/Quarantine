@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://b3n0rytkfp05w"]
+
+[ext_resource type="Script" path="res://test_level.gd" id="1_5qq2q"]
+[ext_resource type="PackedScene" uid="uid://c2pqrwucxdl54" path="res://player.tscn" id="1_cxtqd"]
+[ext_resource type="PackedScene" uid="uid://bq7oduo15y2m4" path="res://alien.tscn" id="3_lix31"]
+
+[node name="test_level" type="Node2D"]
+script = ExtResource("1_5qq2q")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 3
+collision_mask = 3
+
+[node name="walls_collision" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(8, 0, 0, 0, 0, 184, 320, 184, 320, 0, 312, 0, 312, 152, 256, 152, 200, 128, 200, 176, 184, 176, 184, 128, 144, 152, 8, 152)
+
+[node name="walls" type="Polygon2D" parent="StaticBody2D"]
+
+[node name="player" parent="." instance=ExtResource("1_cxtqd")]
+position = Vector2(24, 144)
+
+[node name="alien" parent="." instance=ExtResource("3_lix31")]
+position = Vector2(88, 144)

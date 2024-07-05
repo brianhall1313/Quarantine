@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://bbnpq11mvb5i2"]
+
+[sub_resource type="Curve" id="Curve_mqvg2"]
+_data = [Vector2(0.00561798, 1), 0.0, 0.0, 0, 0, Vector2(0.988764, 0.747253), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_hpv3j"]
+offsets = PackedFloat32Array(0, 0.186667, 0.366667, 0.573333, 0.873333)
+colors = PackedColorArray(1, 0, 0, 1, 1, 0.427451, 0.188235, 1, 1, 0.858824, 0.368627, 1, 0, 0, 0, 1, 0, 0, 0, 0)
+
+[node name="jetpack_flames" type="CPUParticles2D"]
+amount = 500
+lifetime = 0.2
+speed_scale = 0.5
+randomness = 1.0
+emission_shape = 1
+emission_sphere_radius = 2.0
+gravity = Vector2(0, 700)
+radial_accel_min = -50.0
+radial_accel_max = -40.0
+scale_amount_curve = SubResource("Curve_mqvg2")
+color_ramp = SubResource("Gradient_hpv3j")
+hue_variation_max = 1.0

@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://brlotfkolhphe"]
+
+[ext_resource type="Script" path="res://Audio_Controller.gd" id="1_yf6r1"]
+
+[node name="Audio_Controller" type="Node"]
+process_mode = 3
+script = ExtResource("1_yf6r1")
+
+[node name="BGM" type="AudioStreamPlayer" parent="."]
+volume_db = -12.0
+autoplay = true
+
+[node name="Jump" type="AudioStreamPlayer" parent="."]
+
+[node name="Damage" type="AudioStreamPlayer" parent="."]
+
+[node name="Key_Pickup" type="AudioStreamPlayer" parent="."]
+
+[node name="Descent" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+
+[node name="Landing" type="AudioStreamPlayer" parent="."]

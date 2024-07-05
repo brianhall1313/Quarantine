@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=3 uid="uid://byaf5p1yijis"]
+
+[ext_resource type="Texture2D" uid="uid://bm8g41x17y64a" path="res://jetpack_shot.png" id="1_8muwx"]
+[ext_resource type="Script" path="res://jetpack_shot.gd" id="1_ask0f"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ar66b"]
+atlas = ExtResource("1_8muwx")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bafcn"]
+atlas = ExtResource("1_8muwx")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ure3w"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ar66b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bafcn")
+}],
+"loop": true,
+"name": &"default",
+"speed": 7.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_e0f8o"]
+radius = 4.12311
+
+[node name="jetpack_shot" type="Area2D"]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_ask0f")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_ure3w")
+frame_progress = 0.907509
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_e0f8o")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

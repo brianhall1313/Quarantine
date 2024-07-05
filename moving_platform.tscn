@@ -1,0 +1,72 @@
+[gd_scene load_steps=6 format=3 uid="uid://tekfpdogpack"]
+
+[ext_resource type="Script" path="res://moving_platform.gd" id="1_7fbx1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ckntt"]
+size = Vector2(24, 8)
+
+[sub_resource type="Animation" id="Animation_v4jyq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PathFollow2D:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_8wyid"]
+resource_name = "moving_platform"
+length = 2.0
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PathFollow2D:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(-1.56, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nftt8"]
+_data = {
+"RESET": SubResource("Animation_v4jyq"),
+"moving_platform": SubResource("Animation_8wyid")
+}
+
+[node name="moving_platform" type="Path2D"]
+script = ExtResource("1_7fbx1")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="."]
+position = Vector2(56, 0)
+progress = 31.1203
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="PathFollow2D"]
+remote_path = NodePath("../../AnimatableBody2D")
+
+[node name="AnimatableBody2D" type="AnimatableBody2D" parent="."]
+position = Vector2(56, 0)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatableBody2D"]
+shape = SubResource("RectangleShape2D_ckntt")
+
+[node name="ColorRect" type="ColorRect" parent="AnimatableBody2D"]
+offset_left = -12.0
+offset_top = -4.0
+offset_right = 12.0
+offset_bottom = 4.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_nftt8")
+}

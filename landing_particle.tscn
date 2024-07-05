@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://j6uusopypi3o"]
+
+[ext_resource type="Script" path="res://landing_particle.gd" id="1_rmq7q"]
+
+[sub_resource type="Curve" id="Curve_vqrnq"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="landing_particle" type="CPUParticles2D"]
+rotation = -1.5708
+emitting = false
+amount = 30
+lifetime = 0.4
+one_shot = true
+explosiveness = 1.0
+spread = 90.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 20.0
+initial_velocity_max = 20.0
+scale_amount_curve = SubResource("Curve_vqrnq")
+script = ExtResource("1_rmq7q")
+
+[connection signal="finished" from="." to="." method="_on_finished"]

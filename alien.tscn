@@ -1,0 +1,41 @@
+[gd_scene load_steps=7 format=3 uid="uid://bq7oduo15y2m4"]
+
+[ext_resource type="Script" path="res://alien.gd" id="1_gnoia"]
+[ext_resource type="Texture2D" uid="uid://r1qloros6j5e" path="res://alien.png" id="2_e2vfj"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_saifw"]
+atlas = ExtResource("2_e2vfj")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uiu3k"]
+atlas = ExtResource("2_e2vfj")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_geupr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_saifw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uiu3k")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5l2un"]
+size = Vector2(16, 16)
+
+[node name="alien" type="CharacterBody2D"]
+collision_layer = 3
+collision_mask = 3
+script = ExtResource("1_gnoia")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_geupr")
+frame_progress = 0.91274
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_5l2un")

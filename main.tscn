@@ -1,0 +1,209 @@
+[gd_scene load_steps=5 format=3 uid="uid://wnq5ncsxhm3i"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_r72ko"]
+[ext_resource type="Theme" uid="uid://d334f2xsycvqg" path="res://basic_theme.tres" id="2_0q2rc"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yskj1"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4fwpv"]
+bg_color = Color(0.103744, 0.103744, 0.103743, 1)
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_r72ko")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("2_0q2rc")
+
+[node name="PanelContainer" type="PanelContainer" parent="Control"]
+layout_mode = 0
+offset_right = 320.0
+offset_bottom = 320.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/PanelContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="black" type="ColorRect" parent="Control/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+color = Color(0, 0, 0, 1)
+
+[node name="white" type="ColorRect" parent="Control/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
+layout_mode = 0
+offset_right = 312.0
+offset_bottom = 320.0
+
+[node name="Control" type="Control" parent="Control/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="Control/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Control/VBoxContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/VBoxContainer/PanelContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Me And My Shadow"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Control2" type="Control" parent="Control/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="New Game" type="Button" parent="Control/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_yskj1")
+text = "New Game"
+
+[node name="Continue" type="Button" parent="Control/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Continue"
+
+[node name="How to Play" type="Button" parent="Control/VBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "How to Play"
+
+[node name="Credits" type="Button" parent="Control/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Credits"
+
+[node name="Quit" type="Button" parent="Control/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Quit"
+
+[node name="Control3" type="Control" parent="Control/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Polygon2D" type="Polygon2D" parent="Control"]
+polygon = PackedVector2Array(0, 0, 0, 160, 24, 160, 24, 24, 56, 24, 56, 40, 104, 40, 104, 24, 160, 24, 160, 40, 192, 40, 192, 8, 240, 8, 240, 24, 296, 24, 296, 64, 280, 64, 280, 112, 304, 112, 304, 144, 232, 144, 232, 160, 320, 160, 320, 0)
+
+[node name="Polygon2D2" type="Polygon2D" parent="Control"]
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(24, 160, 0, 160, 0, 320, 320, 320, 320, 160, 232, 160, 232, 176, 304, 176, 304, 208, 248, 208, 248, 256, 304, 256, 304, 288, 200, 288, 200, 280, 104, 280, 104, 288, 56, 288, 56, 216, 16, 216, 16, 176, 24, 176)
+
+[node name="how to play" type="PanelContainer" parent="Control"]
+visible = false
+layout_mode = 0
+offset_right = 320.0
+offset_bottom = 320.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_4fwpv")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/how to play"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/how to play/VBoxContainer"]
+layout_mode = 2
+text = "How to Play"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="Control/how to play/VBoxContainer"]
+layout_mode = 2
+text = "Movement: Arrow Keys, WASD
+
+Jump: Space Bar
+jump in the air for a double jump
+Wall jump: 
+pressing the direction away from the wall
+
+Interact: Hold Up(a button on controllers)
+
+Directions: Get both you and 
+your shadow to the exit. 
+Make sure to grab the keys 
+to unlock the exits first."
+horizontal_alignment = 1
+
+[node name="how_to_play_button_back" type="Button" parent="Control/how to play/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 10
+text = "Back"
+
+[node name="Control" type="Control" parent="Control/how to play/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="credits" type="PanelContainer" parent="Control"]
+visible = false
+layout_mode = 0
+offset_right = 320.0
+offset_bottom = 320.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_4fwpv")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/credits"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/credits/VBoxContainer"]
+layout_mode = 2
+text = "Credits"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="Control/credits/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 11
+text = "Made for Summer Jam 2024
+Theme: Opposites
+
+Designer/Programmer
+Brian Hall
+https://pr0t34n.itch.io/
+Music:
+\"Bleeping Demo\" Kevin MacLeod (incompetech.com)
+Licensed under Creative Commons: By Attribution 4.0 
+License http://creativecommons.org/licenses/by/4.0/
+Assets Made Using
+https://www.pixilart.com
+Chiptone(sound):
+https://sfbgames.itch.io/chiptone
+"
+horizontal_alignment = 1
+
+[node name="credits_back" type="Button" parent="Control/credits/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 10
+text = "Back"
+
+[node name="Control" type="Control" parent="Control/credits/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[connection signal="button_up" from="Control/VBoxContainer/VBoxContainer/New Game" to="." method="_on_new_game_button_up"]
+[connection signal="button_up" from="Control/VBoxContainer/VBoxContainer/Continue" to="." method="_on_continue_button_up"]
+[connection signal="button_up" from="Control/VBoxContainer/VBoxContainer/How to Play" to="." method="_on_how_to_play_button_up"]
+[connection signal="button_up" from="Control/VBoxContainer/VBoxContainer/Credits" to="." method="_on_credits_button_up"]
+[connection signal="button_up" from="Control/VBoxContainer/VBoxContainer/Quit" to="." method="_on_quit_button_up"]
+[connection signal="button_up" from="Control/how to play/VBoxContainer/how_to_play_button_back" to="." method="_on_how_to_play_button_back_button_up"]
+[connection signal="button_up" from="Control/credits/VBoxContainer/credits_back" to="." method="_on_credits_back_button_up"]
