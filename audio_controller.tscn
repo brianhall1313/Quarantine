@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://brlotfkolhphe"]
+[gd_scene load_steps=4 format=3 uid="uid://brlotfkolhphe"]
 
 [ext_resource type="Script" path="res://Audio_Controller.gd" id="1_yf6r1"]
+[ext_resource type="AudioStream" uid="uid://bl1bhjabrrrs0" path="res://sedescent.wav" id="2_806nc"]
+[ext_resource type="AudioStream" uid="uid://cpv8g66xv4q3f" path="res://se_landing.wav" id="3_lt1te"]
 
 [node name="Audio_Controller" type="Node"]
 process_mode = 3
@@ -18,5 +20,7 @@ autoplay = true
 
 [node name="Descent" type="AudioStreamPlayer" parent="."]
 process_mode = 3
+stream = ExtResource("2_806nc")
 
 [node name="Landing" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_lt1te")

@@ -1,0 +1,60 @@
+[gd_scene load_steps=4 format=3 uid="uid://dki2rwvyv0ixa"]
+
+[ext_resource type="Script" path="res://level_select.gd" id="1_hlt0w"]
+[ext_resource type="Texture2D" uid="uid://bspwq8tjdkaq6" path="res://pixelart_starfield_diagonal_diffraction_spikes.png" id="2_eux8j"]
+[ext_resource type="Theme" uid="uid://7rffwmqopn3b" path="res://basic_theme.tres" id="3_htlvr"]
+
+[node name="level_select" type="Node2D"]
+script = ExtResource("1_hlt0w")
+
+[node name="ColorRect" type="TextureRect" parent="."]
+offset_right = 320.0
+offset_bottom = 320.0
+texture = ExtResource("2_eux8j")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 320.0
+offset_bottom = 184.0
+theme = ExtResource("3_htlvr")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
+layout_mode = 0
+offset_left = 16.0
+offset_right = 304.0
+offset_bottom = 176.0
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/VBoxContainer/MarginContainer"]
+layout_mode = 2
+text = "Level Select"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Control" type="Control" parent="Control/VBoxContainer"]
+layout_mode = 2
+
+[node name="level_grid" type="GridContainer" parent="Control/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/h_separation = 5
+columns = 5
+
+[node name="0" type="Button" parent="Control/VBoxContainer/level_grid"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "1"
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="back" type="Button" parent="Control/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Back"
+
+[connection signal="button_up" from="Control/VBoxContainer/level_grid/0" to="." method="_on_0_button_up"]
+[connection signal="button_up" from="Control/VBoxContainer/back" to="." method="_on_back_button_up"]

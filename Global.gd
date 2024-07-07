@@ -1,5 +1,8 @@
 extends Node
 
+@onready var explosion = preload("res://explosion.tscn")
+@onready var slime_explosion = preload("res://slime_explosion.tscn")
+@onready var dood_explosion = preload("res://dood_explosion.tscn")
 @onready var landing_particle = preload("res://landing_particle.tscn")
 @onready var wipe = preload("res://wipe.tscn")
 

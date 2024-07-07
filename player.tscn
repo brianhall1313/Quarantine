@@ -65,7 +65,7 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_72rwe"]
 size = Vector2(6, 14)
 
-[node name="player" type="CharacterBody2D"]
+[node name="player" type="CharacterBody2D" groups=["player"]]
 floor_constant_speed = true
 floor_snap_length = 3.0
 script = ExtResource("1_ybc71")
@@ -97,3 +97,5 @@ one_shot = true
 [node name="jetpack_time" type="Timer" parent="."]
 wait_time = 0.5
 one_shot = true
+
+[node name="Camera2D" type="Camera2D" parent="."]

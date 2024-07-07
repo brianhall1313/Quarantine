@@ -1,0 +1,7 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://7rffwmqopn3b"]
+
+[ext_resource type="FontFile" uid="uid://cx0oqtrne4f3l" path="res://MinimalPixelFont.ttf" id="1_5fivw"]
+
+[resource]
+Button/fonts/font = ExtResource("1_5fivw")
+Label/fonts/font = ExtResource("1_5fivw")

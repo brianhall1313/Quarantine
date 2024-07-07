@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://cinwxgwd1umcc"]
+
+[ext_resource type="Script" path="res://explosion.gd" id="1_o0dlo"]
+
+[sub_resource type="Gradient" id="Gradient_ahyr7"]
+offsets = PackedFloat32Array(0.0333333, 0.7, 1)
+colors = PackedColorArray(0, 0.752941, 0, 1, 0, 0.25098, 0, 1, 1, 1, 1, 0)
+
+[node name="slime_explosion" type="CPUParticles2D"]
+emitting = false
+amount = 40
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+emission_shape = 1
+emission_sphere_radius = 4.0
+spread = 180.0
+gravity = Vector2(0, 200)
+initial_velocity_min = 50.0
+initial_velocity_max = 100.0
+color_ramp = SubResource("Gradient_ahyr7")
+script = ExtResource("1_o0dlo")

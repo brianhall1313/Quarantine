@@ -1,11 +1,10 @@
 extends Node
 
 signal player_damage
-signal black_key_pickup
-signal white_key_pickup
 
+signal alien_death
 
-signal pushing(vector)
+signal temperature_update(temp:float)
 
 signal transition_done
 signal transition_start

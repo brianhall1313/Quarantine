@@ -1,6 +1,8 @@
 extends CharacterBody2D
 
 const AIRJUMPSMAX = 5
+const MAXTEMP = 500.0
+const MINTEMP = 0
 
 @onready var shot = preload("res://jetpack_shot.tscn")
 @onready var coyote_timer = $coyote_time
@@ -13,12 +15,18 @@ const AIRJUMPSMAX = 5
 
 @export var movement_data: PlayerMovementData
 
+
 var sprite_height:float = 16
 var is_jumping:bool = false
 var is_falling:bool = false
 var wall_jump_available:bool = false
 var floor_offset:float = sprite_height/2
+
 var air_jumps:int = AIRJUMPSMAX
+var cool_rate = 100
+var current_temp: float = MINTEMP
+var alive:bool = true
+
 
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
@@ -29,24 +37,35 @@ func _ready():
 		
 
 func _physics_process(delta):
-	if (is_jumping or is_falling) and is_on_floor():
-		is_jumping = false
-		is_falling = false
-		air_jumps = AIRJUMPSMAX
-		landing_animation()
-	handle_gravity(delta)
-	var direction = Input.get_axis("left", "right")
-	handle_jump()
-	handle_acceleration(direction,delta)
-	handle_air_acceleration(direction,delta)
-	handle_friction(direction,delta)
-	handle_air_resistance(direction,delta)
-	handle_animation(direction)
-	var was_on_floor = is_on_floor()
-	move_and_slide()
-	if was_on_floor and not is_on_floor() and not is_jumping:
-		is_falling = true
-		coyote_timer.start()
+	if alive:
+		if (is_jumping or is_falling) and is_on_floor():
+			is_jumping = false
+			is_falling = false
+			air_jumps = AIRJUMPSMAX
+			landing_animation()
+		jetpack_upkeep(delta)
+		handle_gravity(delta)
+		var direction = Input.get_axis("left", "right")
+		handle_jump()
+		handle_acceleration(direction,delta)
+		handle_air_acceleration(direction,delta)
+		handle_friction(direction,delta)
+		handle_air_resistance(direction,delta)
+		handle_animation(direction)
+		var was_on_floor = is_on_floor()
+		move_and_slide()
+		if was_on_floor and not is_on_floor() and not is_jumping:
+			is_falling = true
+			coyote_timer.start()
+
+
+func jetpack_upkeep(delta):
+	current_temp -= (cool_rate * delta)
+	GlobalSignalBus.temperature_update.emit(current_temp)
+	if current_temp > MAXTEMP * .5:
+		jetpack.self_modulate = Color("red")
+	else:
+		jetpack.self_modulate = Color("white")
 
 
 
@@ -60,20 +79,23 @@ func handle_gravity(delta):
 func handle_jump():
 	if  is_on_floor() or coyote_timer.time_left > 0:
 		if Input.is_action_just_pressed("jumpfire"):
+			jetpack_heat_up()
 			is_jumping = true
 			jetpack_shot()
 			velocity.y = movement_data.jump_velocity
 			AudioController.jump.play()
 	if not is_on_floor():
 		if Input.is_action_just_pressed("jumpfire") and (is_falling or is_jumping):
-			if air_jumps > 0 :
-				air_jumps -= 1
-				jetpack_shot()
-				velocity.y = movement_data.air_jump_velocity
+			jetpack_heat_up()
+			jetpack_shot()
+			velocity.y = movement_data.air_jump_velocity
 		
 		if Input.is_action_just_released("jumpfire"):
 			if velocity.y < movement_data.jump_velocity/2:
 				velocity.y = movement_data.jump_velocity/2
+	if current_temp>MAXTEMP:
+		jetpack_explosion()
+		take_damage()
 
 
 func handle_acceleration(direction,delta):
@@ -97,12 +119,24 @@ func handle_air_resistance(direction,delta):
 
 func take_damage():
 	AudioController.damage.play()
-	var new = Global.key_particle.instantiate()
+	blood_explosion()
+	alive = false
+	GlobalSignalBus.player_damage.emit()
+	animated_sprite.hide()
+	jetpack.hide()
+
+
+func blood_explosion():
+	var new = Global.dood_explosion.instantiate()
 	get_tree().get_current_scene().add_child(new)
 	new.position = position
 	new.explode()
-	GlobalSignalBus.player_damage.emit()
 
+func jetpack_explosion():
+	var new = Global.explosion.instantiate()
+	get_tree().get_current_scene().add_child(new)
+	new.position = position
+	new.explode()
 
 	
 func landing_animation():
@@ -153,3 +187,8 @@ func jetpack_shot():
 		new.position = right_flames.global_position
 	if left_flames.emitting == true:
 		new.position = left_flames.global_position
+
+
+func jetpack_heat_up():
+	current_temp += cool_rate
+	GlobalSignalBus.temperature_update.emit(current_temp)
