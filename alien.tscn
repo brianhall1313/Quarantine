@@ -28,7 +28,7 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5l2un"]
 size = Vector2(16, 16)
 
-[node name="alien" type="CharacterBody2D"]
+[node name="alien" type="CharacterBody2D" groups=["alien"]]
 collision_layer = 3
 collision_mask = 3
 script = ExtResource("1_gnoia")
@@ -39,3 +39,11 @@ frame_progress = 0.91274
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_5l2un")
+
+[node name="right_floor_detection" type="RayCast2D" parent="."]
+position = Vector2(8, 0)
+target_position = Vector2(0, 16)
+
+[node name="left_floor_detection" type="RayCast2D" parent="."]
+position = Vector2(-8, 0)
+target_position = Vector2(0, 16)

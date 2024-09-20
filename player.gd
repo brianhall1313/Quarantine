@@ -54,13 +54,23 @@ func _physics_process(delta):
 		handle_animation(direction)
 		var was_on_floor = is_on_floor()
 		move_and_slide()
+		check_collision()
 		if was_on_floor and not is_on_floor() and not is_jumping:
 			is_falling = true
 			coyote_timer.start()
 
 
+func check_collision():
+	for i in get_slide_collision_count():
+		var collision = get_slide_collision(i)
+		var collider = collision.get_collider()
+		if collider.is_in_group("alien"):
+			take_damage()
+
+
+
 func jetpack_upkeep(delta):
-	current_temp -= (cool_rate * delta)
+	current_temp = clamp(current_temp - (cool_rate * delta),MINTEMP,MAXTEMP)
 	GlobalSignalBus.temperature_update.emit(current_temp)
 	if current_temp > MAXTEMP * .5:
 		jetpack.self_modulate = Color("red")
@@ -89,10 +99,7 @@ func handle_jump():
 			jetpack_heat_up()
 			jetpack_shot()
 			velocity.y = movement_data.air_jump_velocity
-		
-		if Input.is_action_just_released("jumpfire"):
-			if velocity.y < movement_data.jump_velocity/2:
-				velocity.y = movement_data.jump_velocity/2
+			AudioController.jump.play()
 	if current_temp>MAXTEMP:
 		jetpack_explosion()
 		take_damage()
@@ -118,12 +125,14 @@ func handle_air_resistance(direction,delta):
 
 
 func take_damage():
+	$death.start()
 	AudioController.damage.play()
 	blood_explosion()
 	alive = false
 	GlobalSignalBus.player_damage.emit()
 	animated_sprite.hide()
 	jetpack.hide()
+	$CollisionShape2D.disabled = true
 
 
 func blood_explosion():
@@ -134,6 +143,7 @@ func blood_explosion():
 
 func jetpack_explosion():
 	var new = Global.explosion.instantiate()
+	AudioController.explosion.play()
 	get_tree().get_current_scene().add_child(new)
 	new.position = position
 	new.explode()
@@ -192,3 +202,7 @@ func jetpack_shot():
 func jetpack_heat_up():
 	current_temp += cool_rate
 	GlobalSignalBus.temperature_update.emit(current_temp)
+
+
+func _on_death_timeout():
+	GlobalSignalBus.player_death_finished.emit()

@@ -2,9 +2,11 @@ extends Node
 @onready var bgm = $BGM
 @onready var jump = $Jump
 @onready var damage = $Damage
-@onready var key_pickup = $Key_Pickup
 @onready var descent = $Descent
 @onready var landing = $Landing
+@onready var explosion = $Explosion
+@onready var door = $Door
+
 
 
 # Called when the node enters the scene tree for the first time.

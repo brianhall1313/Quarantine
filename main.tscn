@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://wnq5ncsxhm3i"]
+[gd_scene load_steps=9 format=3 uid="uid://wnq5ncsxhm3i"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_r72ko"]
 [ext_resource type="Theme" uid="uid://7rffwmqopn3b" path="res://basic_theme.tres" id="2_15kaf"]
 [ext_resource type="Texture2D" uid="uid://bspwq8tjdkaq6" path="res://pixelart_starfield_diagonal_diffraction_spikes.png" id="3_f0sk0"]
 [ext_resource type="Texture2D" uid="uid://dw4fc433yku64" path="res://pixelart_starfield.png" id="4_vcxyk"]
 [ext_resource type="Texture2D" uid="uid://banpju2gvoge4" path="res://pixelart_starfield_corona.png" id="5_2216y"]
+[ext_resource type="FontFile" uid="uid://cx0oqtrne4f3l" path="res://MinimalPixelFont.ttf" id="6_md6vo"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_oxvxl"]
 texture = ExtResource("4_vcxyk")
@@ -66,10 +67,6 @@ size_flags_horizontal = 4
 layout_mode = 2
 text = "New Game "
 
-[node name="Continue" type="Button" parent="Control/VBoxContainer/VBoxContainer"]
-layout_mode = 2
-text = "Continue"
-
 [node name="How to Play" type="Button" parent="Control/VBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
@@ -88,6 +85,7 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="how to play" type="PanelContainer" parent="Control"]
+visible = false
 layout_mode = 0
 offset_right = 320.0
 offset_bottom = 184.0
@@ -104,11 +102,14 @@ vertical_alignment = 1
 
 [node name="Label2" type="Label" parent="Control/how to play/VBoxContainer"]
 layout_mode = 2
-text = "Movement: Arrow Keys, WASD
+text = "Oh no! there is an outbreak of alien oozes on our space station
+ and all you have is a defective jetpack! 
+Movement: Arrow Keys, WASD
 
 Jump: Space Bar
 jump in the air for an air jump
-The Jetback is faulty, so every jump shoots a fireball, and increases 
+
+Every jump shoots a fireball, and increases 
 the jetpack's temperature. If your jetpack gets to hot it explodes.
 
 "
@@ -147,17 +148,23 @@ vertical_alignment = 1
 [node name="Label2" type="Label" parent="Control/credits/VBoxContainer"]
 layout_mode = 2
 text = "Made for Mini Jam 162: Heat Limitation: One button two actions.
-
+Engine: Godot 4
 Designer/Programmer
-Brian Hall
-https://pr0t34n.itch.io/
+Brian Hall: https://pr0t34n.itch.io/
 Music:
-
-Assets Made Using
-https://www.pixilart.com
-
-"
+\"Cloud Dancer \" Kevin MacLeod (incompetech.com)
+Licensed under Creative Commons: By Attribution 4.0 License
+http://creativecommons.org/licenses/by/4.0/
+Space Art: https://space-spheremaps.itch.io/"
 horizontal_alignment = 1
+
+[node name="LinkButton" type="LinkButton" parent="Control/credits/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("6_md6vo")
+text = "Godot License"
+uri = "https://godotengine.org/license/"
 
 [node name="credits_back" type="Button" parent="Control/credits/VBoxContainer"]
 layout_mode = 2
@@ -170,7 +177,6 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [connection signal="button_up" from="Control/VBoxContainer/VBoxContainer/New Game" to="." method="_on_new_game_button_up"]
-[connection signal="button_up" from="Control/VBoxContainer/VBoxContainer/Continue" to="." method="_on_continue_button_up"]
 [connection signal="button_up" from="Control/VBoxContainer/VBoxContainer/How to Play" to="." method="_on_how_to_play_button_up"]
 [connection signal="button_up" from="Control/VBoxContainer/VBoxContainer/Credits" to="." method="_on_credits_button_up"]
 [connection signal="button_up" from="Control/VBoxContainer/VBoxContainer/Quit" to="." method="_on_quit_button_up"]

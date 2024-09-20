@@ -46,7 +46,6 @@ func _on_quit_button_up():
 func _on_new_game_button_up():
 	transition()
 	await GlobalSignalBus.transition_done
-	Global.load_default()
 	get_tree().change_scene_to_file("res://level_select.tscn")
 
 

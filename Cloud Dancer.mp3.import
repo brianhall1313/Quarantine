@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cmyxqfg4l235n"
+path="res://.godot/imported/Cloud Dancer.mp3-91e70f29b24fee6ba67b373afe35f864.mp3str"
+
+[deps]
+
+source_file="res://Cloud Dancer.mp3"
+dest_files=["res://.godot/imported/Cloud Dancer.mp3-91e70f29b24fee6ba67b373afe35f864.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -9,6 +9,7 @@ var unlocked: bool = false
 func unlock_door():
 	unlocked = true
 	texture = open_door
+	AudioController.door.play()
 
 
 func _on_interaction_area_body_entered(area):
@@ -16,6 +17,7 @@ func _on_interaction_area_body_entered(area):
 		player_in_area = true
 		print("player has entered door")
 
-func _on_interaction_area_body_exited(_area):
+func _on_interaction_area_body_exited(area):
+	if area.is_in_group("player"):
 		player_in_area = false
 		print("player has left door")

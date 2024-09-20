@@ -12,6 +12,11 @@ func _ready():
 	global_position = left_start_position
 
 
+func setup(pos):
+	mid = pos
+	left_start_position = Vector2(mid.x- move_range,mid.y)
+	right_start_position = Vector2(mid.x + move_range,mid.y)
+
 
 func wipe_right():
 	GlobalSignalBus.transition_start.emit()
@@ -53,4 +58,3 @@ func wipe_in():
 	await tween.finished
 	GlobalSignalBus.transition_done.emit()
 	queue_free()
-
